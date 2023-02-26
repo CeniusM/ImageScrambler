@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWindowsForms>true</UseWindowsForms>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+</Project>
+
+
+using System.Drawing;
+using System.Runtime.InteropServices;
+
+namespace IS
+{
+    internal class Program
+    {
+        static string path = "jezael-melgoza-2FiXtdnVhjQ-unsplash.jpg";
+        static string pathCopy = "jezael-melgoza-2FiXtdnVhjQ-unsplash-Copy.png";
+        static void Main(string[] args)
+        {
+            Console.WriteLine("dwwedfwefewfwe");
+            Console.ReadLine();
+            // Bitmap bitmap = (Bitmap)Image.FromFile(path);
+            // Console.WriteLine(bitmap.Width);
+
+            // Scrambler.Scramble(bitmap);
+
+            // bitmap.Save(pathCopy);
+
+            // bitmap.Dispose();
+        }
+    }
+}
