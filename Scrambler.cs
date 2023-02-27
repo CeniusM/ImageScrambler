@@ -84,9 +84,9 @@ namespace IS
             int pixelCount = bitmap.Width * bitmap.Height;
             buffer = (PixelARGB*)Marshal.AllocHGlobal(pixelCount * sizeof(PixelARGB));
 
-            Console.WriteLine("Scrambling");
+            Program.Log("Scrambling");
 
-            Console.WriteLine("Copy image to pixel buffer");
+            Program.Log("Copy image to pixel buffer");
             for (int i = 0; i < bitmap.Width; i++)
             {
                 for (int j = 0; j < bitmap.Height; j++)
@@ -102,19 +102,19 @@ namespace IS
             }
 
 
-            Console.WriteLine("Scrambling Colors");
+            Program.Log("Scrambling Colors");
             ScrambleColors(bitmap.Width, bitmap.Height);
 
-            Console.WriteLine("Scrambling Lines");
+            Program.Log("Scrambling Lines");
             ScrambleLines(bitmap.Width, bitmap.Height);
 
-            Console.WriteLine("Scrambling With Grains");
+            Program.Log("Scrambling With Grains");
             ScrambleWithGrains(bitmap.Width, bitmap.Height);
 
-            Console.WriteLine("Scrambling Color Shift");
+            Program.Log("Scrambling Color Shift");
             ScrambleColorShift(bitmap.Width, bitmap.Height);
 
-            Console.WriteLine("Copy buffer to image");
+            Program.Log("Copy buffer to image");
             for (int i = 0; i < bitmap.Width; i++)
             {
                 for (int j = 0; j < bitmap.Height; j++)

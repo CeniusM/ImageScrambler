@@ -5,6 +5,11 @@ namespace IS
 {
     internal class Program
     {
+        public static void Log(string message)
+        {
+            Console.WriteLine("{" + $" {DateTime.Now.ToString("h:mm:ss tt")}" + "}" + message);
+        }
+
         [STAThread]
         static void Main()
         {
@@ -14,7 +19,7 @@ namespace IS
                 Bitmap bitmap = new Bitmap(1, 1);
                 while (true)
                 {
-                    Console.WriteLine("Please type in the file path to the image: Write \"Exit\" to exit the program");
+                    Log("Please type in the file path to the image: Write \"Exit\" to exit the program");
                     try
                     {
                         Path = Console.ReadLine()!;
@@ -28,7 +33,7 @@ namespace IS
                     }
                     catch (System.Exception)
                     {
-                        Console.WriteLine("Error!");
+                        Log("Error!");
                         continue;
                         throw;
                     }
@@ -39,24 +44,24 @@ namespace IS
                 Console.Clear();
 
                 Console.CursorVisible = false;
-                Console.WriteLine("Load file");
+                Log("Load file");
 
-                Console.WriteLine("Width: " + bitmap.Width + ". Height: " + bitmap.Height);
+                Log("Width: " + bitmap.Width + ". Height: " + bitmap.Height);
 
-                Console.WriteLine("Scrambler");
+                Log("Scrambler");
                 Scrambler.Scramble(bitmap);
 
-                Console.WriteLine("Save file");
+                Log("Save file");
                 string pathName = Path.Split('.')[0] + "-ScrambledCopy." + Path.Split('.')[1];
                 bitmap.Save(pathName);
 
-                Console.WriteLine("Dispose");
+                Log("Dispose");
                 bitmap.Dispose();
 
-                Console.WriteLine("Done");
+                Log("Done");
                 Console.CursorVisible = true;
 
-                Console.WriteLine("Press Enter to continue");
+                Log("Press Enter to continue");
                 Console.ReadLine();
                 Console.Clear();
             }
