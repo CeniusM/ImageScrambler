@@ -49,8 +49,8 @@ namespace IS
             return oldBuffer;
         }
 
-
-        const int LineNum = 15;
+        
+        const int LineNum = 15; // progress line location
         static int LastNum = 0;
         static void Progress(float num, float goal)
         {
@@ -91,11 +91,6 @@ namespace IS
             {
                 for (int j = 0; j < bitmap.Height; j++)
                 {
-                    // var pixel = bitmap.GetPixel(i, j);
-                    // buffer[i + j * bitmap.Width].A = 255;
-                    // buffer[i + j * bitmap.Width].R = pixel.R;
-                    // buffer[i + j * bitmap.Width].G = pixel.G;
-                    // buffer[i + j * bitmap.Width].B = pixel.B;
                     buffer[i + j * bitmap.Width].FromARGB(pixelData[i + j * bitmap.Width]);
                 }
                 Progress(i, bitmap.Width);
@@ -119,8 +114,6 @@ namespace IS
             {
                 for (int j = 0; j < bitmap.Height; j++)
                 {
-                    // Color pixel = Color.FromArgb(buffer[i + j * bitmap.Width].GetARGB());
-                    // bitmap.SetPixel(i, j, pixel);
                     pixelData[i + j * bitmap.Width] = buffer[i + j * bitmap.Width].GetARGB();
                 }
                 Progress(i, bitmap.Width);
@@ -241,7 +234,7 @@ namespace IS
             byte r = pixel.R;
             byte g = pixel.G;
             byte b = pixel.B;
-
+            
             return new PixelARGB(
                 a,
                 (byte)Math.Clamp(r - amount, 0, 255),

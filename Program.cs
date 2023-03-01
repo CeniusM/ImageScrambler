@@ -7,7 +7,8 @@ namespace IS
     {
         public static void Log(string message)
         {
-            Console.WriteLine("{" + $" {DateTime.Now.ToString("h:mm:ss tt")}" + "}" + message);
+            string timestamp = DateTime.Now.ToString("{h:mm:ss tt}");
+            Console.WriteLine($"{timestamp} {message}");
         }
 
         [STAThread]
@@ -23,6 +24,7 @@ namespace IS
                     try
                     {
                         Path = Console.ReadLine()!;
+
                         if (Path.ToLower() == "exit")
                         {
                             Path = "";
