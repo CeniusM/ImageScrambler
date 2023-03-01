@@ -14,6 +14,7 @@ namespace IS
         [STAThread]
         static void Main()
         {
+            DateTime start_time = DateTime.Now;
             while (true)
             {
                 string Path = "";
@@ -24,7 +25,9 @@ namespace IS
                     try
                     {
                         Path = Console.ReadLine()!;
-
+                        if (Path.ToLower() == "image") {
+                            Path = "C:\\Users\\Lenovo\\OneDrive\\Billeder\\test\\image.jpg";
+                        }
                         if (Path.ToLower() == "exit")
                         {
                             Path = "";
@@ -50,7 +53,7 @@ namespace IS
 
                 Log("Width: " + bitmap.Width + ". Height: " + bitmap.Height);
 
-                Log("Scrambler");
+                Log("Scrambling");
                 Scrambler.Scramble(bitmap);
 
                 Log("Save file");
@@ -62,7 +65,7 @@ namespace IS
 
                 Log("Done");
                 Console.CursorVisible = true;
-
+                Console.WriteLine($"Finished after {DateTime.Now - start_time}");
                 Log("Press Enter to continue");
                 Console.ReadLine();
                 Console.Clear();
