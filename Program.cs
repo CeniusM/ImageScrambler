@@ -21,10 +21,11 @@ namespace IS
                 Bitmap bitmap = new Bitmap(1, 1);
                 while (true)
                 {
-                    Log("Please type in the file path to the image: Write \"Exit\" to exit the program");
+                    Log("Please type in the file path to the image. Write \"Exit\" to exit the program");
                     try
                     {
                         Path = Console.ReadLine()!;
+                        // TESTING PURPOSES
                         if (Path.ToLower() == "image") {
                             Path = "C:\\Users\\Lenovo\\OneDrive\\Billeder\\test\\image.jpg";
                         }
@@ -37,8 +38,14 @@ namespace IS
                         bitmap = (Bitmap)Image.FromFile(Path);
                         break;
                     }
-                    catch (System.Exception)
+                    catch (System.IO.FileNotFoundException) {
+                        Console.WriteLine($"ERORR: File \"{Path}\" was not found!");
+                        continue;
+                        throw;
+                    }
+                    catch (System.Exception e)
                     {
+                        Console.WriteLine($"DEBUG: {e}");   
                         Log("Error!");
                         continue;
                         throw;
