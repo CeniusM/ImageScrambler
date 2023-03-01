@@ -27,7 +27,8 @@ namespace IS
                         Console.Write(">>> ");
                         Path = Console.ReadLine()!;
                         // TESTING PURPOSES
-                        if (Path.ToLower() == "image") {
+                        if (Path.ToLower() == "image")
+                        {
                             Path = "C:\\Users\\Lenovo\\OneDrive\\Billeder\\test\\image.jpg";
                             //break;
                         }
@@ -43,13 +44,15 @@ namespace IS
                         break;
                     }
                     // file not found
-                    catch (System.IO.FileNotFoundException) {
+                    catch (System.IO.FileNotFoundException)
+                    {
                         Console.WriteLine($"ERORR: File \"{Path}\" was not found!");
                         continue;
                         throw;
                     }
                     // no path given
-                    catch (System.ArgumentException) {
+                    catch (System.ArgumentException)
+                    {
                         Console.WriteLine($"ERROR: No path given");
                         continue;
                         throw;
@@ -58,7 +61,7 @@ namespace IS
                     catch (System.Exception e)
                     {
                         Log("Error!");
-                        Console.WriteLine($"DEBUG: {e}");   
+                        Console.WriteLine($"DEBUG: {e}");
                         continue;
                         throw;
                     }
@@ -67,10 +70,10 @@ namespace IS
                 if (Path == "EXIT")
                     //Console.WriteLine("last check");
                     break;
-                
+
                 Console.Clear();
 
-                
+
                 Console.CursorVisible = false;
 
                 Log("Width: " + bitmap.Width + ". Height: " + bitmap.Height);
@@ -79,6 +82,7 @@ namespace IS
                 Scrambler.Scramble(bitmap);
 
                 Log("Save file");
+                // will break if more than one dot is in the name of the file
                 string pathName = Path.Split('.')[0] + "-ScrambledCopy." + Path.Split('.')[1];
                 bitmap.Save(pathName);
 
