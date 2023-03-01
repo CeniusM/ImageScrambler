@@ -21,9 +21,10 @@ namespace IS
                 Bitmap bitmap = new Bitmap(1, 1);
                 while (true)
                 {
-                    Log("Please type in the file path to the image. Write \"Exit\" to exit the program");
+                    Log("Please type in the file path to the image. Write \"exit\" to exit the program");
                     try
                     {
+                        Console.Write(">>> ");
                         Path = Console.ReadLine()!;
                         // TESTING PURPOSES
                         if (Path.ToLower() == "image") {
@@ -62,6 +63,7 @@ namespace IS
                         throw;
                     }
                 }
+                // if statement for exit commands
                 if (Path == "EXIT")
                     //Console.WriteLine("last check");
                     break;
