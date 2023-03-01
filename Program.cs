@@ -17,7 +17,7 @@ namespace IS
             DateTime start_time = DateTime.Now;
             while (true)
             {
-                string Path = "";
+                string image_file_path = "";
                 Bitmap bitmap = new Bitmap(1, 1);
                 while (true)
                 {
@@ -25,28 +25,27 @@ namespace IS
                     try
                     {
                         Console.Write(">>> ");
-                        Path = Console.ReadLine()!;
+                        image_file_path = Console.ReadLine()!;
                         // TESTING PURPOSES
-                        if (Path.ToLower() == "image")
+                        if (image_file_path.ToLower() == "image")
                         {
-                            Path = "C:\\Users\\Lenovo\\OneDrive\\Billeder\\test\\image.jpg";
-                            //break;
+                            image_file_path = "C:\\Users\\Lenovo\\OneDrive\\Billeder\\test\\image.jpg";
                         }
                         // exiting
-                        if (Path.ToLower() == "exit" || Path.ToLower() == "quit")
+                        if (image_file_path.ToLower() == "exit" || image_file_path.ToLower() == "quit")
                         {
-                            Path = "EXIT";
+                            image_file_path = "EXIT";
                             break;
                         }
                         Log("Loading file");
                         // loads image into a bitmap 
-                        bitmap = (Bitmap)Image.FromFile(Path);
+                        bitmap = (Bitmap)Image.FromFile(image_file_path);
                         break;
                     }
                     // file not found
                     catch (System.IO.FileNotFoundException)
                     {
-                        Console.WriteLine($"ERORR: File \"{Path}\" was not found!");
+                        Console.WriteLine($"ERORR: File \"{image_file_path}\" was not found!");
                         continue;
                         throw;
                     }
@@ -67,10 +66,8 @@ namespace IS
                     }
                 }
                 // if statement for exit commands
-                if (Path == "EXIT")
-                    //Console.WriteLine("last check");
+                if (image_file_path == "EXIT")
                     break;
-
                 Console.Clear();
 
 
@@ -81,9 +78,11 @@ namespace IS
                 Log("Scrambling");
                 Scrambler.Scramble(bitmap);
 
-                Log("Save file");
-                // will break if more than one dot is in the name of the file
-                string pathName = Path.Split('.')[0] + "-ScrambledCopy." + Path.Split('.')[1];
+                Log("Saving file");
+                string file_name_no_ext = Path.GetFileNameWithoutExtension(image_file_path);
+                string file_name_just_ext =  Path.GetExtension(image_file_path);
+                string file_path = Path.GetDirectoryName(image_file_path);
+                string pathName = Path.Combine(file_path, $"{file_name_no_ext}-ScrambledCopy{file_name_just_ext}");
                 bitmap.Save(pathName);
 
                 Log("Dispose");
