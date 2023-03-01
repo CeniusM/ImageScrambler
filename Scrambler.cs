@@ -49,7 +49,7 @@ namespace IS
             return oldBuffer;
         }
 
-        
+
         const int LineNum = 15; // progress line location
         static int LastNum = 0;
         static void Progress(float num, float goal)
@@ -118,6 +118,7 @@ namespace IS
                 }
                 Progress(i, bitmap.Width);
             }
+            Progress(1, 1);
 
             Marshal.FreeHGlobal((IntPtr)buffer);
             bitmap.UnlockBits(bitmapdata);
@@ -138,6 +139,7 @@ namespace IS
                 }
                 Progress(i, width);
             }
+            Progress(1, 1);
         }
 
         private static void ScrambleLines(int width, int height)
@@ -165,6 +167,7 @@ namespace IS
                 }
                 Progress(i, iterations);
             }
+            Progress(1, 1);
         }
 
         private static void ScrambleWithGrains(int width, int height)
@@ -190,6 +193,7 @@ namespace IS
 
                 Progress(i, iterations);
             }
+            Progress(1, 1);
         }
 
         private static void ScrambleColorShift(int width, int height)
@@ -225,6 +229,7 @@ namespace IS
 
             var oldBuffer = SwapBuffer(dstBuffer);
             Marshal.FreeHGlobal((IntPtr)oldBuffer);
+            Progress(1, 1);
         }
 
         private static byte RandomizeByte(byte val, int range = 50) => (byte)Math.Clamp(val + rand.Next(0, range * 2) - range, 0, 255);
@@ -234,7 +239,7 @@ namespace IS
             byte r = pixel.R;
             byte g = pixel.G;
             byte b = pixel.B;
-            
+
             return new PixelARGB(
                 a,
                 (byte)Math.Clamp(r - amount, 0, 255),
