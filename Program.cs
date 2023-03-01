@@ -29,7 +29,7 @@ namespace IS
                         if (Path.ToLower() == "image") {
                             Path = "C:\\Users\\Lenovo\\OneDrive\\Billeder\\test\\image.jpg";
                         }
-                        if (Path.ToLower() == "exit")
+                        if (Path.ToLower() == "exit" || Path.ToLower() == "quit")
                         {
                             Path = "";
                             break;
