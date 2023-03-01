@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace IS
 {
@@ -72,7 +73,7 @@ namespace IS
         /// This function locks the bitmap
         /// </summary>
         /// <param name="bitmap"></param>
-        public static void Scramble(Bitmap bitmap)
+        public static void Scramble(Bitmap bitmap) // 10 - 34
         {
             if (LockSrcamble)
                 return;
@@ -87,15 +88,7 @@ namespace IS
             Program.Log("Scrambling");
 
             Program.Log("Copy image to pixel buffer");
-            for (int i = 0; i < bitmap.Width; i++)
-            {
-                for (int j = 0; j < bitmap.Height; j++)
-                {
-                    buffer[i + j * bitmap.Width].FromARGB(pixelData[i + j * bitmap.Width]);
-                }
-                Progress(i, bitmap.Width);
-            }
-
+            Buffer.MemoryCopy(pixelData, buffer, pixelCount * sizeof(PixelARGB), pixelCount * sizeof(PixelARGB));
 
             Program.Log("Scrambling Colors");
             ScrambleColors(bitmap.Width, bitmap.Height);
@@ -110,15 +103,7 @@ namespace IS
             ScrambleColorShift(bitmap.Width, bitmap.Height);
 
             Program.Log("Copy buffer to image");
-            for (int i = 0; i < bitmap.Width; i++)
-            {
-                for (int j = 0; j < bitmap.Height; j++)
-                {
-                    pixelData[i + j * bitmap.Width] = buffer[i + j * bitmap.Width].GetARGB();
-                }
-                Progress(i, bitmap.Width);
-            }
-            Progress(1, 1);
+            Buffer.MemoryCopy(buffer, pixelData, pixelCount * sizeof(PixelARGB), pixelCount * sizeof(PixelARGB));
 
             Marshal.FreeHGlobal((IntPtr)buffer);
             bitmap.UnlockBits(bitmapdata);
