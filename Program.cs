@@ -30,6 +30,7 @@ namespace IS
                             Path = "";
                             break;
                         }
+                        Log("Loading file");
                         bitmap = (Bitmap)Image.FromFile(Path);
                         break;
                     }
@@ -46,7 +47,6 @@ namespace IS
                 Console.Clear();
 
                 Console.CursorVisible = false;
-                Log("Load file");
 
                 Log("Width: " + bitmap.Width + ". Height: " + bitmap.Height);
 
