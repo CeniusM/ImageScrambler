@@ -28,34 +28,47 @@ namespace IS
                         // TESTING PURPOSES
                         if (Path.ToLower() == "image") {
                             Path = "C:\\Users\\Lenovo\\OneDrive\\Billeder\\test\\image.jpg";
+                            //break;
                         }
+                        // exiting
                         if (Path.ToLower() == "exit" || Path.ToLower() == "quit")
                         {
                             Path = "";
                             break;
                         }
                         Log("Loading file");
+                        // loads image into a bitmap 
                         bitmap = (Bitmap)Image.FromFile(Path);
                         break;
                     }
+                    // file not found
                     catch (System.IO.FileNotFoundException) {
                         Console.WriteLine($"ERORR: File \"{Path}\" was not found!");
                         continue;
                         throw;
                     }
+                    // no path given
+                    catch (System.ArgumentException) {
+                        Console.WriteLine($"ERROR: No path given");
+                        continue;
+                        throw;
+                    }
+                    // general catch
                     catch (System.Exception e)
                     {
-                        Console.WriteLine($"DEBUG: {e}");   
                         Log("Error!");
+                        Console.WriteLine($"DEBUG: {e}");   
                         continue;
                         throw;
                     }
                 }
                 if (Path == "")
+                    //Console.WriteLine("last check");
                     break;
-
+                
                 Console.Clear();
 
+                
                 Console.CursorVisible = false;
 
                 Log("Width: " + bitmap.Width + ". Height: " + bitmap.Height);
