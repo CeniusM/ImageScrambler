@@ -33,7 +33,7 @@ namespace IS
                         // exiting
                         if (Path.ToLower() == "exit" || Path.ToLower() == "quit")
                         {
-                            Path = "";
+                            Path = "EXIT";
                             break;
                         }
                         Log("Loading file");
@@ -62,7 +62,7 @@ namespace IS
                         throw;
                     }
                 }
-                if (Path == "")
+                if (Path == "EXIT")
                     //Console.WriteLine("last check");
                     break;
                 
