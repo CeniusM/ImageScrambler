@@ -14,47 +14,75 @@ namespace IS
         [STAThread]
         static void Main()
         {
+            DateTime start_time = DateTime.Now;
             while (true)
             {
-                string Path = "";
+                string image_file_path = "";
                 Bitmap bitmap = new Bitmap(1, 1);
                 while (true)
                 {
-                    Log("Please type in the file path to the image: Write \"Exit\" to exit the program");
+                    Log("Please type in the file path to the image. Write \"exit\" to exit the program");
                     try
                     {
-                        Path = Console.ReadLine()!;
-
-                        if (Path.ToLower() == "exit")
+                        Console.Write(">>> ");
+                        image_file_path = Console.ReadLine()!;
+                        // TESTING PURPOSES
+                        if (image_file_path.ToLower() == "image")
                         {
-                            Path = "";
+                            image_file_path = "C:\\Users\\Lenovo\\OneDrive\\Billeder\\test\\image.jpg";
+                        }
+                        // exiting
+                        if (image_file_path.ToLower() == "exit" || image_file_path.ToLower() == "quit")
+                        {
+                            image_file_path = "EXIT";
                             break;
                         }
                         Log("Loading file");
-                        bitmap = (Bitmap)Image.FromFile(Path);
+                        // loads image into a bitmap 
+                        bitmap = (Bitmap)Image.FromFile(image_file_path);
                         break;
                     }
-                    catch (System.Exception)
+                    // file not found
+                    catch (System.IO.FileNotFoundException)
+                    {
+                        Console.WriteLine($"ERORR: File \"{image_file_path}\" was not found!");
+                        continue;
+                        throw;
+                    }
+                    // no path given
+                    catch (System.ArgumentException)
+                    {
+                        Console.WriteLine($"ERROR: No path given");
+                        continue;
+                        throw;
+                    }
+                    // general catch
+                    catch (System.Exception e)
                     {
                         Log("Error!");
+                        Console.WriteLine($"DEBUG: {e}");
                         continue;
                         throw;
                     }
                 }
-                if (Path == "")
+                // if statement for exit commands
+                if (image_file_path == "EXIT")
                     break;
-
                 Console.Clear();
+
 
                 Console.CursorVisible = false;
 
                 Log("Width: " + bitmap.Width + ". Height: " + bitmap.Height);
 
-                Log("Scrambler");
+                Log("Scrambling");
                 Scrambler.Scramble(bitmap);
 
-                Log("Save file");
-                string pathName = Path.Split('.')[0] + "-ScrambledCopy." + Path.Split('.')[1];
+                Log("Saving file");
+                string file_name_no_ext = Path.GetFileNameWithoutExtension(image_file_path);
+                string file_name_just_ext =  Path.GetExtension(image_file_path);
+                string file_path = Path.GetDirectoryName(image_file_path);
+                string pathName = Path.Combine(file_path, $"{file_name_no_ext}-ScrambledCopy{file_name_just_ext}");
                 bitmap.Save(pathName);
 
                 Log("Dispose");
@@ -62,7 +90,7 @@ namespace IS
 
                 Log("Done");
                 Console.CursorVisible = true;
-
+                Console.WriteLine($"Finished after {DateTime.Now - start_time}");
                 Log("Press Enter to continue");
                 Console.ReadLine();
                 Console.Clear();

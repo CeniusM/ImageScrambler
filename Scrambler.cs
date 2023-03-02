@@ -85,7 +85,7 @@ namespace IS
             int pixelCount = bitmap.Width * bitmap.Height;
             buffer = (PixelARGB*)Marshal.AllocHGlobal(pixelCount * sizeof(PixelARGB));
 
-            Program.Log("Scrambling");
+            //Program.Log("Scrambling");
 
             Program.Log("Copy image to pixel buffer");
             Buffer.MemoryCopy(pixelData, buffer, pixelCount * sizeof(PixelARGB), pixelCount * sizeof(PixelARGB));
