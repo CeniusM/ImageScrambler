@@ -107,7 +107,7 @@ namespace IS
 
             Marshal.FreeHGlobal((IntPtr)buffer);
             bitmap.UnlockBits(bitmapdata);
-            LockSrcamble = true;
+            LockSrcamble = false;
         }
 
         private static void ScrambleColors(int width, int height)
