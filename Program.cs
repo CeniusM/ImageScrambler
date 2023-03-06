@@ -70,7 +70,6 @@ namespace IS
                     break;
                 Console.Clear();
 
-
                 Console.CursorVisible = false;
 
                 Log("Width: " + bitmap.Width + ". Height: " + bitmap.Height);
@@ -79,10 +78,10 @@ namespace IS
                 Scrambler.Scramble(bitmap);
 
                 Log("Saving file");
-                string file_name_no_ext = Path.GetFileNameWithoutExtension(image_file_path);
-                string file_name_just_ext =  Path.GetExtension(image_file_path);
-                string file_path = Path.GetDirectoryName(image_file_path);
-                string pathName = Path.Combine(file_path, $"{file_name_no_ext}-ScrambledCopy{file_name_just_ext}");
+                string file_name_no_ext   = Path.GetFileNameWithoutExtension(image_file_path);
+                string file_name_just_ext = Path.GetExtension(image_file_path);
+                string file_path          = Path.GetDirectoryName(image_file_path);
+                string pathName           = Path.Combine(file_path, $"{file_name_no_ext}-ScrambledCopy{file_name_just_ext}");
                 bitmap.Save(pathName);
 
                 Log("Dispose");
